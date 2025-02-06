@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Have no idea what to eat?</title>
+    <link rel="icon" href="images/icon.png" type="image/png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        body::-webkit-scrollbar {
+            display: none;
+        }
+
+        .form-container {
+            background-color: rgba(0, 0, 0, 0.75);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .form-container h1 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            color: white;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 1.2rem;
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group select {
+            margin-bottom: 2%;
+            width: 100%;
+            padding: 0.75rem;
+            font-size: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            transition: border-color 0.3s;
+        }
+
+        .form-group select:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+        .form-group input {
+            margin-bottom: 2%;
+            width: 100%;
+            padding: 0.75rem;
+            font-size: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+        .form-group button {
+            display: block;
+            margin: 0 auto;
+            margin-top: 3%;
+            width: 50%;
+            padding: 0.75rem;
+            font-size: 1rem;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .form-group button:hover {
+            background-color: #0057b3;
+            transform: scale(1.1);
+        }
+
+        body {
+            background-image: url('images/background.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="form-container">
+        <h1>Let us choose your meal</h1>
+        <form class="form-group" id="main-form">
+            <div>
+                <label for="goal">Why are you here?</label>
+                <select id="goal" name="goal" required onchange="showGoalDetails()">
+                    <option value="random">Just don't know what to eat (want a random meal)</option>
+                    <option value="bodybuilding">Build Muscle</option>
+                    <option value="height">Increase Height</option>
+                    <option value="general-health">Improve General Health</option>
+                    <option value="better-sleep">Improve Sleep</option>
+                    <option value="weight-loss">Support Weight Loss</option>
+                    <option value="brain-health">Boost Brain and Memory</option>
+                </select>
+            </div>
+            <div id="common-fields" style="display:none;">
+                <label for="age">Age (year)</label>
+                <input type="number" id="age" name="age" min="0" max="200" required>
+                <label for="height">Height (cm)</label>
+                <input type="number" id="height" name="height" min="1" max="300" required>
+                <label for="weight">Weight (kg)</label>
+                <input type="number" id="weight" name="weight" min="1" max="1000" required>
+                <label for="gender">Gender</label>
+                <select id="gender" name="gender">
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select>
+            </div>
+
+            <div id="bodybuilding-fields" style="display:none;">
+                <label for="muscle-goal">Goal</label>
+                <select class="no5" name="muscle-goal">
+                    <option value="bulking">Bulking</option>
+                    <option value="cutting">Cutting</option>
+                    <option value="maintaining">Maintaining Muscle</option>
+                </select>
+            </div>
+
+            <div id="height-fields" style="display:none;">
+                <label for="deficiency">Deficiency</label>
+                <select class="no5" name="deficiency">
+                    <option value="none">Nothing</option>
+                    <option value="d">Vitamin D</option>
+                    <option value="mg">Magnesium</option>
+                    <option value="ca">Calcium</option>
+                    <option value="p">Protein</option>
+                    <option value="zn">Zinc</option>
+                </select>
+            </div>
+
+            <div id="general-health-fields" style="display:none;">
+                <label for="health-condition">Condition</label>
+                <select class="no5" name="health-condition">
+                    <option value="norm">Normal</option>
+                    <option value="weak-immune">Weak Immunity</option>
+                    <option value="fatigue">Fatigue</option>
+                    <option value="hypertension">Hypertension</option>
+                    <option value="anemia">Anemia</option>
+                </select>
+            </div>
+
+            <div id="better-sleep-fields" style="display:none;">
+                <label for="sleep-condition">Condition</label>
+                <select class="no5" name="sleep-condition">
+                    <option value="insomnia">Insomnia</option>
+                    <option value="stress">Stress-Induced Sleep Issues</option>
+                    <option value="poor-sleep">Poor Quality Sleep</option>
+                    <option value="morning-fatigue">Morning Fatigue</option>
+                </select>
+            </div>
+
+            <div id="weight-loss-fields" style="display:none;">
+                <label for="weight-condition">Condition</label>
+                <select class="no5" name="weight-condition">
+                    <option value="hunger">Frequent Hunger Cravings</option>
+                    <option value="sugar">Sugar Cravings</option>
+                    <option value="fat">Overweight Due to Excess Fat</option>
+                </select>
+            </div>
+
+            <div id="brain-health-fields" style="display:none;">
+                <label for="brain-goal">Goal</label>
+                <select class="no5" name="brain-goal">
+                    <option value="work">Intense Brain Work</option>
+                    <option value="stress">Stress Reduction</option>
+                    <option value="memory">Memory Boost</option>
+                    <option value="mental">Reduce Mental Fatigue</option>
+                    <option value="focus">Focus Improvement</option>
+                </select>
+            </div>
+            <script>
+                function showGoalDetails() {
+                    document.getElementById('bodybuilding-fields').style.display = 'none';
+                    document.getElementById('height-fields').style.display = 'none';
+                    document.getElementById('general-health-fields').style.display = 'none';
+                    document.getElementById('better-sleep-fields').style.display = 'none';
+                    document.getElementById('weight-loss-fields').style.display = 'none';
+                    document.getElementById('brain-health-fields').style.display = 'none';
+                    document.getElementById('common-fields').style.display = 'none';
+                    document.getElementById('common-fields').style.display = 'block';
+                    var goal = document.getElementById('goal').value;
+                    if (goal === 'bodybuilding') {
+                        document.getElementById('bodybuilding-fields').style.display = 'block';
+                        const selects = document.querySelectorAll('.no5');
+                        selects.forEach(select => {
+                            if (select.name !== 'muscle-goal') {
+                                select.value = null;
+                            }
+                        });
+                    } else if (goal === 'height') {
+                        document.getElementById('height-fields').style.display = 'block';
+                        const selects = document.querySelectorAll('.no5');
+                        selects.forEach(select => {
+                            if (select.name !== 'deficiency') {
+                                select.value = null;
+                            }
+                        });
+                    } else if (goal === 'general-health') {
+                        document.getElementById('general-health-fields').style.display = 'block';
+                        const selects = document.querySelectorAll('.no5');
+                        selects.forEach(select => {
+                            if (select.name !== 'health-condition') {
+                                select.value = null;
+                            }
+                        });
+                    } else if (goal === 'better-sleep') {
+                        document.getElementById('better-sleep-fields').style.display = 'block';
+                        const selects = document.querySelectorAll('.no5');
+                        selects.forEach(select => {
+                            if (select.name !== 'sleep-condition') {
+                                select.value = null;
+                            }
+                        });
+                    } else if (goal === 'weight-loss') {
+                        document.getElementById('weight-loss-fields').style.display = 'block';
+                        const selects = document.querySelectorAll('.no5');
+                        selects.forEach(select => {
+                            if (select.name !== 'weight-condition') {
+                                select.value = null;
+                            }
+                        });
+                    } else if (goal === 'brain-health') {
+                        document.getElementById('brain-health-fields').style.display = 'block';
+                        const selects = document.querySelectorAll('.no5');
+                        selects.forEach(select => {
+                            if (select.name !== 'brain-goal') {
+                                select.value = null;
+                            }
+                        });
+                    } else if (goal === 'random') {
+                        document.getElementById('common-fields').style.display = 'none';
+                        resetdata();
+                    }
+                }
+            </script>
+            <div>
+                <a style="color: white;">Check your health condition </a>
+                <a href="https://www.eufic.org/en/healthy-living/category/health-conditions"
+                    style="text-decoration: none; color: #007bff;" target="_blank">here</a>
+                <br>
+                <button type="submit">Process</button>
+            </div>
+        </form>
+    </div>
+    <script>
+        function resetdata() {
+            const selects = document.querySelectorAll('.no5');
+            selects.forEach(select => {
+                select.value = null;
+            });
+            document.getElementById('age').value = 0;
+            document.getElementById('height').value = 1;
+            document.getElementById('weight').value = 1;
+            document.getElementById('gender').value = null;
+        }
+        resetdata();
+        document.getElementById('main-form').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const selects = document.querySelectorAll('.no5');
+
+            let selectedValue = null;
+            selects.forEach(select => {
+                if (!selectedValue && select.value) {
+                    selectedValue = select.value;
+                }
+            });
+            const data = selectedValue;
+            const goal = document.getElementById('goal').value;
+            const age = document.getElementById('age').value;
+            const height = document.getElementById('height').value;
+            const weight = document.getElementById('weight').value;
+            const gender = document.getElementById('gender').value;
+            const alldata = { data, goal, age, height, weight, gender };
+            const Query = new URLSearchParams(alldata).toString();
+            if (goal === 'random') {
+                window.open('https://huirayj.github.io/random-meal-generator/');
+            } else {
+                window.open(`result.html?${Query}`);
+            }
+        });
+
+    </script>
+</body>
+</html>
