@@ -65,18 +65,78 @@
         transform: scale(1.25);
       }
     }
+
+    @import url("https://fonts.googleapis.com/css2?family=Titan+One&display=swap");
+
+    .wrapper {
+      width: 100vw;
+      text-align: center;
+      display: inline;
+      margin-right: 1rem;
+
+      span {
+        -webkit-text-stroke-width: 1.25px;
+        -webkit-text-stroke-color: #000;
+        font-size: 5rem;
+        text-shadow: 0 0px #f3c623, 0 0px #f2aaaa;
+        transform: translate(0, 100%) rotate(4deg);
+        animation: jump 2s ease-in-out infinite;
+        display: inline-block;
+        font-family: "Titan One", cursive;
+        color: #fff;
+
+        @for $i from 1 through 7 {
+          &:nth-child(#{$i}) {
+            animation-delay: 120ms * $i;
+          }
+        }
+      }
+    }
+
+    @keyframes jump {
+      33% {
+        text-shadow: 0 10px #f37121, 0 25px #f2aaaa;
+      }
+
+      50% {
+        transform: translate(0, 0) rotate(-4deg);
+        text-shadow: 0 0px #8fc0a9, 0 0px #84a9ac;
+      }
+
+      66.67% {
+        text-shadow: 0 -10px #d54062, 0 -25px #8fc0a9;
+      }
+    }
+    .wrapper span {
+      transform: translate(0, -25%) rotate(4deg);
+    }
   </style>
 </head>
 
 <body>
-  <h1 style="font-size: 500%;" class="zoom-object">Here you go!</h1>
+  <div class="wrapper">
+    <span>H</span>
+    <span>E</span>
+    <span>R</span>
+    <span>E</span>
+  </div>
+  <div class="wrapper">
+    <span>Y</span>
+    <span>O</span>
+    <span>U</span>
+  </div>
+  <div class="wrapper">
+    <span>G</span>
+    <span>O</span>
+    <span>!</span>
+  </div>
   <div class="text">
     <label id='output1'>Not enough data, please fill in all blanks.</label>
     <br>
     <strong>Example: </strong><label id='output2'>Of course I don't know.</label>
   </div>
   <br>
-  <img src="images/loading.gif" id="image" class="eimg" onclick='searchGoogle()'/>
+  <img src="images/loading.gif" id="image" class="eimg" onclick='searchGoogle()' />
   <script>
     window.onload = function () {
       const output1 = document.getElementById('output1');
@@ -84,7 +144,7 @@
 
       applyTypingEffect(output1, function () {
         output2.style.visibility = 'visible';
-        applyTypingEffect(output2, function() {
+        applyTypingEffect(output2, function () {
           document.getElementById('image').src = isrc;
           srch = ex;
         });
@@ -407,7 +467,7 @@
         isrc = "images/image61.jpg";
       }
     }
-    if(ex === "") isrc = "images/lol.jpg";
+    if (ex === "") isrc = "images/lol.jpg";
     function searchGoogle() {
       if (srch !== "") window.open(`https://www.google.com/search?q=${encodeURIComponent(srch)}`, "_blank");
     }
